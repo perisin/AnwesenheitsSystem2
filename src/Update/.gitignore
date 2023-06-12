@@ -8,3 +8,7 @@
 /EmployeeRetriever.class
 /ShiftManager.class
 /BreakManager.class
+/ShiftRetriever.class
+/TimeConverter.class
+/BreakRetriever.class
+/EntityEditor.class
