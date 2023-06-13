@@ -1,50 +1,65 @@
 package Update;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShiftManager {
-	
-	private Integer activeShiftID;
-	private Integer activeBreakID;
+	private List<Integer> activeShiftIDs;
+	private List<Integer> activeBreakIDs;
 	
 	private BreakManager breakManager;
 	
 	private ShiftRetriever shiftRetriever;
 	private ShiftEditor shiftEditor;
-	
+		
 	public ShiftManager() {
+		activeShiftIDs = new ArrayList<Integer>();
+		activeBreakIDs = new ArrayList<Integer>();
+
 		shiftRetriever = new ShiftRetriever();
 		shiftEditor = new ShiftEditor();
 		breakManager = new BreakManager();
 	}
 	
 	public void startShift(Employee employee) {
-		if(activeShiftID == null) {
+		if(employeeHasActiveShift(employee) == null) {
 			Shift shift = new Shift(getLowestShiftID(), employee.getEmployeeID());
 			shift.setShiftStart(LocalDateTime.now());
-			activeShiftID = shift.getShiftID();
-			shiftEditor.insertEntity(shift);			
+			activeShiftIDs.add(shift.getShiftID());
+			shiftEditor.insertEntity(shift);										
 		}
 	}
 	
-	public void endShift() {
-		if(activeShiftID != null && activeBreakID == null) {
-			for(Shift shift : shiftRetriever.getEntitys()) {
-				if(activeShiftID == shift.getShiftID()) {
-					shift.setShiftEnd(LocalDateTime.now());
-					shiftEditor.updateEntity(shift);
-				}
+	public void endShift(Employee employee) {
+		Shift shift = employeeHasActiveShift(employee);
+		if(shift != null) {
+			shift.setShiftEnd(LocalDateTime.now());
+			shiftEditor.updateEntity(shift);
+			activeShiftIDs.remove(shift.getShiftID());
+		}
+	}
+	
+	public void startBreak(Employee employee) {
+		Shift shift = employeeHasActiveShift(employee);
+		if(shift != null) {
+			activeBreakIDs.add(breakManager.getLowestBreakID());
+			breakManager.startBreak(shift, activeBreakIDs);
+			
+		}
+	}
+	public void endBreak(Employee employee) {
+		Shift shift = employeeHasActiveShift(employee);
+		if(shift != null) {
+			Integer breakID = breakManager.endBreak(shift, activeBreakIDs);
+			if(breakID != null) {
+				activeBreakIDs.remove(breakID);
 			}
-			activeShiftID = null;
 		}
 	}
 	
-	public void startBreak() {
-		activeBreakID = breakManager.getLowestBreakID();
-	}
-	public void endBreak() {
-		
-	}
+
+	
 	
 	public int getLowestShiftID() {
 		int lowestFreeID = 1;
@@ -62,10 +77,22 @@ public class ShiftManager {
 		return false;
 	}
 	
-	public Integer getActiveShiftID() {
-		return activeShiftID;
+	public Shift employeeHasActiveShift(Employee employee) {
+		for(Integer shiftID : activeShiftIDs) {
+			for(Shift shift : shiftRetriever.getEntitys()) {
+				if(shift.getShiftID() == shiftID && employee.getEmployeeID() == shift.getEmployeeID()) {
+					return shift;
+				}
+			}
+		}
+		return null;
 	}
-	public Integer getActiveBreakID() {
-		return activeBreakID;
+	
+	public Break getShiftHasActiveBreak(Employee employee) {
+		Shift shift = employeeHasActiveShift(employee);
+		if(shift != null) {
+			return breakManager.shiftHasActiveBreak(shift, activeBreakIDs);
+		}
+		return null;
 	}
 }

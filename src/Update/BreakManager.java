@@ -1,6 +1,8 @@
 package Update;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 public class BreakManager {
 	
@@ -13,20 +15,33 @@ public class BreakManager {
 		breakEditor = new BreakEditor();
 	}
 	
-	public void startBreak(int shiftID) {
-		Break _break = new Break(getLowestBreakID(), shiftID);
-		_break.setBreakStart(LocalDateTime.now());
-		breakEditor.insertEntity(_break);
-	}
-	public void endBreak(int breakID) {
-		for(Break _break : breakRetriever.getEntitys()) {
-			if(_break.getBreakID() == breakID) {
-				_break.setBreakEnd(LocalDateTime.now());
-				breakEditor.updateEntity(_break);
-			}
+	public void startBreak(Shift shift, List<Integer> activeBreakIDs) {
+		if(shiftHasActiveBreak(shift, activeBreakIDs) == null) {
+			Break _break = new Break(getLowestBreakID(), shift.getShiftID());
+			_break.setBreakStart(LocalDateTime.now());
+			breakEditor.insertEntity(_break);			
 		}
 	}
+	public Integer endBreak(Shift shift, List<Integer> breakIDs) {
+		Break _break = shiftHasActiveBreak(shift, breakIDs);
+		if(_break != null) {
+			_break.setBreakEnd(LocalDateTime.now());
+			breakEditor.updateEntity(_break);
+			return _break.getBreakID();
+		}
+		return null;
+	}
 	
+	public Break shiftHasActiveBreak(Shift shift, List<Integer> activeBreakIDs) {
+			for(Integer breakID : activeBreakIDs) {
+				for(Break _break : breakRetriever.getEntitys()) {
+					if(breakID == _break.getBreakID() && _break.getShiftID() == shift.getShiftID()) {
+						return _break;
+					}
+				}
+			}
+		return null;
+	}
 	
 	public int getLowestBreakID() {
 		int lowestFreeID = 1;
