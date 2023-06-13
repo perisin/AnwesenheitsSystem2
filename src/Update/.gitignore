@@ -12,3 +12,6 @@
 /TimeConverter.class
 /BreakRetriever.class
 /EntityEditor.class
+/EmployeeEditor.class
+/UpdateEntity.class
+/ShiftEditor.class

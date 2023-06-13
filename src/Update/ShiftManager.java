@@ -9,6 +9,8 @@ public class ShiftManager {
 	
 	private BreakManager breakManager;
 	
+	private ShiftEditor shiftEditor;
+	
 	public ShiftManager() {
 		breakManager = new BreakManager();
 	}
@@ -18,7 +20,7 @@ public class ShiftManager {
 			Shift shift = new Shift(getLowestShiftID(), employee.getEmployeeID());
 			shift.setShiftStart(LocalDateTime.now());
 			activeShiftID = shift.getShiftID();
-			//write new shift			
+			shiftEditor.insertEntity(shift);			
 		}
 	}
 	

@@ -9,6 +9,9 @@ public class BreakManager {
 		_break.setStartBreak(LocalDateTime.now());
 		// write break
 	}
+	public void endBreak(int shiftID) {
+		
+	}
 	
 	public int getLowestBreakID() {
 		return 0;

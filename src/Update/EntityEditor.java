@@ -29,18 +29,7 @@ public abstract class EntityEditor<T> {
         }
     }
 
-    public void updateEntity(T entity) {
-    	String sqlCommand = getUpdateCommand();
-    	try {
-    		PreparedStatement statement = connection.prepareStatement(sqlCommand);
-    		setUpdateStatementValues(statement, entity);
-    		statement.executeUpdate();
-    		statement.close();
-    	}
-    	catch(Exception e){
-    		System.out.println("Error executing UpdateCommand: " + e);
-    	}
-    }
+
     
     public void deleteEntity(T entity) {
         String sqlCommand = getDeleteCommand(entity);
@@ -55,8 +44,6 @@ public abstract class EntityEditor<T> {
 
     public abstract String getInsertCommand();
     public abstract void setInsertStatementValues(PreparedStatement statement, T entity) throws SQLException;
-    public abstract String getUpdateCommand();
-    public abstract void setUpdateStatementValues(PreparedStatement statement, T entity) throws SQLException;
     public abstract String getDeleteCommand(T entity);
 
     public void closeConnection() {

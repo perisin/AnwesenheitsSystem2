@@ -1,8 +1,9 @@
 package Update;
 
-import PreOrganized.Employee;
 
 public class EmployeeManager {
+	
+	private EmployeeEditor employeeEditor;
 	
 	public boolean isCorrectPassword(Employee employee, String password) {
 		if(employee.getPassword() == password) {
@@ -14,5 +15,17 @@ public class EmployeeManager {
 	public boolean isAdmin(Employee employee) {
 		return employee.getIs_admin();
 	}
-	// create and delete employees
+
+	public void createEmployee(Employee employee) {
+		employee.setEmployeeID(getLowestEmployeeID());
+		employeeEditor.insertEntity(employee);
+	}
+	
+	public void deleteEmployee(Employee employee) {
+		employeeEditor.deleteEntity(employee);
+	}
+	
+	public int getLowestEmployeeID() {
+		return 0;
+	}
 }
