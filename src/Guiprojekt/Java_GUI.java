@@ -1,34 +1,39 @@
 package Guiprojekt;
+
+import Update.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Java_GUI extends JFrame {
-    private JComboBox<String> nameComboBox;
+	
+    private JComboBox<Employee> nameComboBox;
     private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
     private JButton cancelButton;
+    
+    //private Employee currentChosenEmployee;
 
-    private Map<String, String> userPasswords;
+    private EmployeeRetriever employeeRetriever;
+    private EmployeeManager employeeManager;
+    
 
     public Java_GUI() {
+    	employeeManager = new EmployeeManager();
+    	employeeRetriever = new EmployeeRetriever();
+    	System.out.println(employeeRetriever.getEntitys().size());
+    	
+    	
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 250);
         setResizable(false);
         setLocationRelativeTo(null);
 
-        // Initialisiere die Benutzernamen und Passwörter
-        userPasswords = new HashMap<>();
-        userPasswords.put("Aldin Ajrovic", "fortnite");
-        userPasswords.put("Filip Kuzmicz", "pole");
-        userPasswords.put("Svetozar Perisin", "serbenschwein");
+
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -38,12 +43,11 @@ public class Java_GUI extends JFrame {
 
         JLabel nameLabel = new JLabel("Name:");
         nameComboBox = new JComboBox<>();
-        nameComboBox.addItem("-");
-        nameComboBox.addItem("Aldin Ajrovic");
-        nameComboBox.addItem("Filip Kuzmicz");
-        nameComboBox.addItem("Svetozar Perisin");
-        sortNames();
-
+        
+        for(Employee employee : employeeRetriever.getEntitys()) {
+        	nameComboBox.addItem(employee);
+        }
+        
         JLabel passwordLabel = new JLabel("Passwort:");
         passwordField = new JPasswordField(20);
 
@@ -62,10 +66,13 @@ public class Java_GUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedName = (String) nameComboBox.getSelectedItem();
-                char[] password = passwordField.getPassword();
+                Employee selectedEmployee = (Employee) nameComboBox.getSelectedItem();
 
-                if (isValidLogin(selectedName, password)) {
+
+                char[] charPassword = passwordField.getPassword();
+                String password = new String(charPassword);
+
+                if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
                     // Öffne die Admin GUI, wenn die Anmeldung erfolgreich ist
                     AdminGUI adminGUI = new AdminGUI();
                     adminGUI.setVisible(true);
@@ -117,24 +124,6 @@ public class Java_GUI extends JFrame {
         setVisible(true);
     }
 
-    private boolean isValidLogin(String selectedName, char[] password) {
-        String passwordString = new String(password);
-        String storedPassword = userPasswords.get(selectedName);
-
-        return storedPassword != null && storedPassword.equals(passwordString);
-    }
-
-    private void sortNames() {
-        List<String> names = new ArrayList<>();
-        for (int i = 0; i < nameComboBox.getItemCount(); i++) {
-            names.add(nameComboBox.getItemAt(i));
-        }
-        Collections.sort(names);
-        nameComboBox.removeAllItems();
-        for (String name : names) {
-            nameComboBox.addItem(name);
-        }
-    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

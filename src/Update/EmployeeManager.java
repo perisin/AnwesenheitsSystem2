@@ -12,7 +12,7 @@ public class EmployeeManager {
 	}
 	
 	public boolean isCorrectPassword(Employee employee, String password) {
-		if(employee.getPassword() == password) {
+		if(employee.getPassword().equals(password)) {
 			return true;
 		}
 		return false;

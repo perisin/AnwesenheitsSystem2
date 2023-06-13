@@ -38,4 +38,9 @@ public class Employee {
 	public boolean getIs_admin() {
 		return is_admin;
 	}
+	
+	@Override
+	public String toString() {
+		return getFirstName() + " " + getLastName();
+	}
 }
