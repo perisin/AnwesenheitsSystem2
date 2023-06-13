@@ -3,8 +3,8 @@ package Update;
 import java.time.*;
 
 public class Break {
-	private LocalDateTime startBreak;
-	private LocalDateTime endBreak;
+	private LocalDateTime breakStart;
+	private LocalDateTime breakEnd;
 	
 	private int breakID;
 	private int shiftID;
@@ -13,26 +13,26 @@ public class Break {
 		this.breakID = breakID;
 		this.shiftID = shiftID;
 	}
-	public Break(int breakID ,LocalDateTime startBreak, LocalDateTime endBreak, int shiftID) {
+	public Break(int breakID ,LocalDateTime breakStart, LocalDateTime breakEnd, int shiftID) {
 		this.breakID = breakID;
-		this.startBreak = startBreak;
-		this.endBreak = endBreak;
+		this.breakStart = breakStart;
+		this.breakEnd = breakEnd;
 		this.shiftID = shiftID;
 	}
 	
-	public LocalDateTime getStartBreak() {
-		return startBreak;
+	public LocalDateTime getBreakStart() {
+		return breakStart;
 	}
-	public void setStartBreak(LocalDateTime startBreak) {
-		this.startBreak = startBreak;
+	public void setBreakStart(LocalDateTime breakStart) {
+		this.breakStart = breakStart;
 	}
-	public LocalDateTime getEndBreak() {
-		return endBreak;
+	public LocalDateTime getBreakEnd() {
+		return breakEnd;
 	}
-	public void setEndBreak(LocalDateTime endBreak) {
-		this.endBreak = endBreak;
+	public void setBreakEnd(LocalDateTime breakEnd) {
+		this.breakEnd = breakEnd;
 	}
-	public int getTimeSpanID() {
+	public int getBreakID() {
 		return breakID;
 	}
 

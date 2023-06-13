@@ -18,7 +18,19 @@ public class EmployeeEditor extends EntityEditor<Employee> {
 		statement.setString(4, employee.getPassword());
 		statement.setBoolean(5, employee.getIs_admin());
 	}
-
+	@Override
+	public String getUpdateCommand() {
+		return "Update employee set firstName = ?, lastName = ?, password = ?, is_Admin = ? WHERE employeeID = ?";
+	}
+	
+	@Override
+	public void setUpdateStatementValues(PreparedStatement statement, Employee employee) throws SQLException{
+		statement.setString(1, employee.getFirstName());
+		statement.setString(2, employee.getLastName());
+		statement.setString(3, employee.getPassword());
+		statement.setBoolean(4, employee.getIs_admin());
+		statement.setInt(5, employee.getEmployeeID());
+	}
 	
 	@Override
 	public String getDeleteCommand(Employee employee) {

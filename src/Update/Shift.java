@@ -23,7 +23,6 @@ public class Shift {
 	}
 	public int getEmployeeID() {
 		return employeeID;
-		
 	}
 
 	public LocalDateTime getShiftStart() {

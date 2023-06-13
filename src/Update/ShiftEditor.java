@@ -7,7 +7,7 @@ public class ShiftEditor extends EntityEditor<Shift>{
 		
 	@Override
 	public String getInsertCommand() {
-		return "INSERT INTO employee(shiftID, shiftStart, shiftEnd, employeeID) values(?,?,?,?)";
+		return "INSERT INTO shift(shiftID, shiftStart, shiftEnd, employeeID) values(?,?,?,?)";
 	}
 	
 	@Override
@@ -17,10 +17,21 @@ public class ShiftEditor extends EntityEditor<Shift>{
 		statement.setTimestamp(2, TimeConverter.localtimeToTimestamp(shift.getShiftStart()));
 		statement.setInt(4, shift.getEmployeeID());
 	}
-
+	@Override
+	public String getUpdateCommand() {
+		return "Update shift set startShift = ?, endShift = ?, employeeID = ? WHERE shiftID = ?";
+	}
+	
+	@Override
+	public void setUpdateStatementValues(PreparedStatement statement, Shift shift) throws SQLException{
+		statement.setTimestamp(1, TimeConverter.localtimeToTimestamp(shift.getShiftStart()));
+		statement.setTimestamp(2, TimeConverter.localtimeToTimestamp(shift.getShiftEnd()));
+		statement.setInt(3, shift.getEmployeeID());
+		statement.setInt(4, shift.getShiftID());
+	}
 	
 	@Override
 	public String getDeleteCommand(Shift shift) {
-		return "DELETE FROM shifts where shiftID = " + shift.getShiftID();
+		return "DELETE FROM shift where shiftID = " + shift.getShiftID();
 	}
 }

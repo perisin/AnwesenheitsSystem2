@@ -9,9 +9,12 @@ public class ShiftManager {
 	
 	private BreakManager breakManager;
 	
+	private ShiftRetriever shiftRetriever;
 	private ShiftEditor shiftEditor;
 	
 	public ShiftManager() {
+		shiftRetriever = new ShiftRetriever();
+		shiftEditor = new ShiftEditor();
 		breakManager = new BreakManager();
 	}
 	
@@ -26,17 +29,43 @@ public class ShiftManager {
 	
 	public void endShift() {
 		if(activeShiftID != null && activeBreakID == null) {
+			for(Shift shift : shiftRetriever.getEntitys()) {
+				if(activeShiftID == shift.getShiftID()) {
+					shift.setShiftEnd(LocalDateTime.now());
+					shiftEditor.updateEntity(shift);
+				}
+			}
 			activeShiftID = null;
-			//update shift with endshift			
 		}
 	}
 	
 	public void startBreak() {
 		activeBreakID = breakManager.getLowestBreakID();
-		breakManager.startBreak(activeShiftID);
+	}
+	public void endBreak() {
+		
 	}
 	
 	public int getLowestShiftID() {
-		return 0;
+		int lowestFreeID = 1;
+		while(containsID(lowestFreeID)) {
+			lowestFreeID++;
+		}
+		return lowestFreeID;
+	}
+	private boolean containsID(int id) {
+		for(Shift shift : shiftRetriever.getEntitys()) {
+			if(shift.getShiftID() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Integer getActiveShiftID() {
+		return activeShiftID;
+	}
+	public Integer getActiveBreakID() {
+		return activeBreakID;
 	}
 }

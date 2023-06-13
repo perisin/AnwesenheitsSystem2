@@ -17,6 +17,7 @@ public abstract class EntityEditor<T> {
         }
     }
 
+    //Creates new Object and needs a new ID
     public void insertEntity(T entity) {
         String sqlCommand = getInsertCommand();
         try {
@@ -27,6 +28,18 @@ public abstract class EntityEditor<T> {
         } catch (Exception e) {
             System.out.println("Error executing insert command: " + e);
         }
+    }
+    // looks for an object with an allready determined ID
+    public void updateEntity(T entity) {
+    	String sqlCommand = getInsertCommand();
+        try {
+            PreparedStatement statement = connection.prepareStatement(sqlCommand);
+            setInsertStatementValues(statement, entity);
+            statement.executeUpdate();
+            statement.close();
+        } catch (Exception e) {
+            System.out.println("Error executing insert command: " + e);
+        }	
     }
 
 
@@ -44,6 +57,8 @@ public abstract class EntityEditor<T> {
 
     public abstract String getInsertCommand();
     public abstract void setInsertStatementValues(PreparedStatement statement, T entity) throws SQLException;
+    public abstract String getUpdateCommand();
+    public abstract void setUpdateStatementValues(PreparedStatement statement, T entity) throws SQLException;
     public abstract String getDeleteCommand(T entity);
 
     public void closeConnection() {
