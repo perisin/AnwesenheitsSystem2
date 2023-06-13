@@ -1,7 +1,10 @@
-package Update;
+package Shift;
 
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+
+import Converter.EntityRetriever;
+import Converter.TimeConverter;
 
 public class ShiftRetriever extends EntityRetriever<Shift> {
 	String sqlCommand = "Select shiftID, shiftStart, shiftEnd, employeeID FROM shifts";

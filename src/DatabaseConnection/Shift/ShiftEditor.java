@@ -1,7 +1,10 @@
-package Update;
+package Shift;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import Converter.EntityEditor;
+import Converter.TimeConverter;
 
 public class ShiftEditor extends EntityEditor<Shift>{
 		

@@ -1,6 +1,8 @@
-package Update;
+package Employee;
 
 import java.sql.ResultSet;
+
+import Converter.EntityRetriever;
 
 public class EmployeeRetriever extends EntityRetriever<Employee>{
 	

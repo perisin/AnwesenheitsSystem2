@@ -1,7 +1,10 @@
-package Update;
+package Break;
 
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+
+import Converter.EntityRetriever;
+import Converter.TimeConverter;
 
 public class BreakRetriever extends EntityRetriever<Break> {
 	String sqlCommand = "Select employeeID, firstName, lastName, password, is_Admin FROM employee";

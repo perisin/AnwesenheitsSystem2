@@ -1,8 +1,12 @@
-package Update;
+package Shift;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import Break.Break;
+import Break.BreakManager;
+import Employee.Employee;
 
 public class ShiftManager {
 	private List<Integer> activeShiftIDs;

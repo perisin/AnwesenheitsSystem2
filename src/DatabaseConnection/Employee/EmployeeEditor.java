@@ -1,7 +1,9 @@
-package Update;
+package Employee;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import Converter.EntityEditor;
 
 
 public class EmployeeEditor extends EntityEditor<Employee> {

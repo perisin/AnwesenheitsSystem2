@@ -1,11 +1,10 @@
-package Guiprojekt;
-
-import Update.*;
+package Gui;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import Employee.*;
 
 public class Java_GUI extends JFrame {
 	

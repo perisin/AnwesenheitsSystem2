@@ -1,7 +1,11 @@
-package Update;
+package Break;
+
+import Converter.EntityEditor;
+import Converter.TimeConverter;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
 
 public class BreakEditor extends EntityEditor<Break> {
 	//break cannot be used as a variable, so it is called _break
