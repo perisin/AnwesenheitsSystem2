@@ -13,7 +13,6 @@ public class AdminPanel extends JMenu {
         setText("AdminPanel");
 
         addPersonMenuItem = new JMenuItem("Person hinzufügen");
-        editPersonMenuItem = new JMenuItem("Person bearbeiten");
         deletePersonMenuItem = new JMenuItem("Person entfernen");
 
         add(addPersonMenuItem);
@@ -22,10 +21,6 @@ public class AdminPanel extends JMenu {
 
         addPersonMenuItem.addActionListener(e -> {
             addPerson();
-        });
-
-        editPersonMenuItem.addActionListener(e -> {
-            editPerson();
         });
 
         deletePersonMenuItem.addActionListener(e -> {
@@ -41,13 +36,6 @@ public class AdminPanel extends JMenu {
         }
     }
 
-    private void editPerson() {
-        String name = JOptionPane.showInputDialog(javaGUI, "Geben Sie den Namen der zu bearbeitenden Person ein:");
-        if (name != null && !name.isEmpty()) {
-            // Fügen Sie den Code zum Bearbeiten der Person hier ein
-            JOptionPane.showMessageDialog(javaGUI, "Person bearbeiten: " + name);
-        }
-    }
 
     private void deletePerson() {
         String name = JOptionPane.showInputDialog(javaGUI, "Geben Sie den Namen der zu löschenden Person ein:");

@@ -40,13 +40,6 @@ public class AdminGUI extends JFrame {
             }
         });
 
-        editUserButton = new JButton("Benutzer bearbeiten");
-        editUserButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(AdminGUI.this, "Benutzer bearbeiten");
-            }
-        });
-
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(adminLabel, gbc);

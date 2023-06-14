@@ -1,7 +1,6 @@
 package Gui;
+
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -64,23 +63,7 @@ public class Java_GUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Employee selectedEmployee = (Employee) nameComboBox.getSelectedItem();
-
-                char[] charPassword = passwordField.getPassword();
-                String password = new String(charPassword);
-
-                if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
-                    if (selectedEmployee.isAdmin()) {
-                        // Öffne das Admin-Panel, wenn die Anmeldung erfolgreich ist und der Mitarbeiter ein Administrator ist
-                        AdminGUI adminGUI = new AdminGUI();
-                        adminGUI.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(Java_GUI.this, "Sie haben keine Administratorrechte!", "Fehler", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(Java_GUI.this, "Ungültige Anmeldedaten!", "Fehler", JOptionPane.ERROR_MESSAGE);
-                    passwordField.setText("");
-                }
+                login();
             }
         });
 
@@ -94,7 +77,9 @@ public class Java_GUI extends JFrame {
         passwordField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && e.isControlDown()) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    login();
+                } else if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE && e.isControlDown()) {
                     passwordField.setText("");
                 }
             }
@@ -102,6 +87,8 @@ public class Java_GUI extends JFrame {
 
         // Füge die Komponenten zum Panel hinzu
 
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         panel.add(nameLabel, gbc);
         gbc.gridx = 1;
         panel.add(nameComboBox, gbc);
@@ -123,6 +110,27 @@ public class Java_GUI extends JFrame {
 
         add(panel);
         setVisible(true);
+    }
+
+    private void login() {
+        Employee selectedEmployee = (Employee) nameComboBox.getSelectedItem();
+
+        char[] charPassword = passwordField.getPassword();
+        String password = new String(charPassword);
+
+        if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
+        	System.out.println(selectedEmployee.isAdmin());
+            if (selectedEmployee.getIs_admin()) {
+                // Öffne das Admin-Panel, wenn die Anmeldung erfolgreich ist und der Mitarbeiter ein Administrator ist
+                AdminGUI adminGUI = new AdminGUI();
+                adminGUI.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(Java_GUI.this, "Sie haben keine Administratorrechte!", "Fehler", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(Java_GUI.this, "Ungültige Anmeldedaten!", "Fehler", JOptionPane.ERROR_MESSAGE);
+            passwordField.setText("");
+        }
     }
 
     public static void main(String[] args) {

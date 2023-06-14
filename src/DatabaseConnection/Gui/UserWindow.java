@@ -23,6 +23,15 @@ public class UserWindow {
 
         userFrame.add(panel, BorderLayout.CENTER);
 
+        // Laden des Pfeilbildes über den vollständigen Dateipfad
+        ImageIcon arrowIcon = new ImageIcon("C:/Pfad/zur/arrow_left.png"); // Bitte Pfad anpassen
+        if (arrowIcon.getImage() == null) {
+            System.err.println("Fehler beim Laden des Pfeilbildes.");
+        } else {
+            JLabel arrowLabel = new JLabel(arrowIcon);
+            userFrame.add(arrowLabel, BorderLayout.NORTH);
+        }
+
         JButton kommenButton = new JButton("Kommen");
         kommenButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
