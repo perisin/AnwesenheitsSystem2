@@ -21,7 +21,6 @@ public class Java_GUI extends JFrame {
     public Java_GUI() {
         employeeManager = new EmployeeManager();
         employeeRetriever = new EmployeeRetriever();
-        System.out.println(employeeRetriever.getEntitys().size());
 
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,7 +69,7 @@ public class Java_GUI extends JFrame {
                 String password = new String(charPassword);
 
                 if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
-                    if (selectedEmployee.isAdmin()) {
+                    if (selectedEmployee.getIs_admin()) {
                         // Öffne das Admin-Panel, wenn die Anmeldung erfolgreich ist und der Mitarbeiter ein Administrator ist
                         AdminGUI adminGUI = new AdminGUI();
                         adminGUI.setVisible(true);
