@@ -41,7 +41,7 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return getFirstName() + " " + getLastName();
+		return getFirstName() + " " + getLastName() + " " + getPassword();
 	}
 	public boolean isAdmin() {
 		// TODO Auto-generated method stub

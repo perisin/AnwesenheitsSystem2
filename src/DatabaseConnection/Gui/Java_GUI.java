@@ -14,7 +14,7 @@ public class Java_GUI extends JFrame {
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
     private JButton cancelButton;
-    
+
     private EmployeeRetriever employeeRetriever;
     private EmployeeManager employeeManager;
 
