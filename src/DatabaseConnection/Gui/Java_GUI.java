@@ -20,7 +20,6 @@ public class Java_GUI extends JFrame {
     public Java_GUI() {
         employeeManager = new EmployeeManager();
         employeeRetriever = new EmployeeRetriever();
-        System.out.println(employeeRetriever.getEntitys().size());
 
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,7 +62,23 @@ public class Java_GUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                login();
+                Employee selectedEmployee = (Employee) nameComboBox.getSelectedItem();
+
+                char[] charPassword = passwordField.getPassword();
+                String password = new String(charPassword);
+
+                if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
+                    if (selectedEmployee.getIs_admin()) {
+                        // Öffne das Admin-Panel, wenn die Anmeldung erfolgreich ist und der Mitarbeiter ein Administrator ist
+                        AdminGUI adminGUI = new AdminGUI();
+                        adminGUI.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(Java_GUI.this, "Sie haben keine Administratorrechte!", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(Java_GUI.this, "Ungültige Anmeldedaten!", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    passwordField.setText("");
+                }
             }
         });
 
