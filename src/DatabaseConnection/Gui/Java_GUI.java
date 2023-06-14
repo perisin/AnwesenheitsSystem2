@@ -134,7 +134,7 @@ public class Java_GUI extends JFrame {
         String password = new String(charPassword);
 
         if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
-        	System.out.println(selectedEmployee.isAdmin());
+        	System.out.println(selectedEmployee.getIs_admin());
             if (selectedEmployee.getIs_admin()) {
                 // Öffne das Admin-Panel, wenn die Anmeldung erfolgreich ist und der Mitarbeiter ein Administrator ist
                 AdminGUI adminGUI = new AdminGUI();
