@@ -38,6 +38,10 @@ public class Java_GUI extends JFrame {
         JLabel nameLabel = new JLabel("Name:");
         nameComboBox = new JComboBox<>();
 
+        nameComboBox.addItem(new Employee(0, "bar", "sie", "password", true));
+        nameComboBox.addItem(new Employee(1, "ba", "marlon", "anders", false));
+        nameComboBox.addItem(new Employee(2, "car", "leonard", "marlom", false));
+
         for (Employee employee : employeeRetriever.getEntitys()) {
             nameComboBox.addItem(employee);
         }
