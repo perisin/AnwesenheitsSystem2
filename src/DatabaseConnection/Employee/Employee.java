@@ -43,4 +43,8 @@ public class Employee {
 	public String toString() {
 		return getFirstName() + " " + getLastName();
 	}
+	public boolean isAdmin() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

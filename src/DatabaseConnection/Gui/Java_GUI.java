@@ -1,38 +1,33 @@
 package Gui;
-
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import Employee.*;
 
 public class Java_GUI extends JFrame {
-	
+
     private JComboBox<Employee> nameComboBox;
     private JPasswordField passwordField;
     private JCheckBox showPasswordCheckBox;
     private JButton loginButton;
     private JButton cancelButton;
     
-    //private Employee currentChosenEmployee;
-
     private EmployeeRetriever employeeRetriever;
     private EmployeeManager employeeManager;
-    
 
     public Java_GUI() {
-    	employeeManager = new EmployeeManager();
-    	employeeRetriever = new EmployeeRetriever();
-    	System.out.println(employeeRetriever.getEntitys().size());
-    	
-    	
+        employeeManager = new EmployeeManager();
+        employeeRetriever = new EmployeeRetriever();
+        System.out.println(employeeRetriever.getEntitys().size());
+
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 250);
         setResizable(false);
         setLocationRelativeTo(null);
-
-
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
@@ -42,11 +37,11 @@ public class Java_GUI extends JFrame {
 
         JLabel nameLabel = new JLabel("Name:");
         nameComboBox = new JComboBox<>();
-        
-        for(Employee employee : employeeRetriever.getEntitys()) {
-        	nameComboBox.addItem(employee);
+
+        for (Employee employee : employeeRetriever.getEntitys()) {
+            nameComboBox.addItem(employee);
         }
-        
+
         JLabel passwordLabel = new JLabel("Passwort:");
         passwordField = new JPasswordField(20);
 
@@ -67,14 +62,17 @@ public class Java_GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Employee selectedEmployee = (Employee) nameComboBox.getSelectedItem();
 
-
                 char[] charPassword = passwordField.getPassword();
                 String password = new String(charPassword);
 
                 if (employeeManager.isCorrectPassword(selectedEmployee, password)) {
-                    // Öffne die Admin GUI, wenn die Anmeldung erfolgreich ist
-                    AdminGUI adminGUI = new AdminGUI();
-                    adminGUI.setVisible(true);
+                    if (selectedEmployee.isAdmin()) {
+                        // Öffne das Admin-Panel, wenn die Anmeldung erfolgreich ist und der Mitarbeiter ein Administrator ist
+                        AdminGUI adminGUI = new AdminGUI();
+                        adminGUI.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(Java_GUI.this, "Sie haben keine Administratorrechte!", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(Java_GUI.this, "Ungültige Anmeldedaten!", "Fehler", JOptionPane.ERROR_MESSAGE);
                     passwordField.setText("");
@@ -122,7 +120,6 @@ public class Java_GUI extends JFrame {
         add(panel);
         setVisible(true);
     }
-
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
