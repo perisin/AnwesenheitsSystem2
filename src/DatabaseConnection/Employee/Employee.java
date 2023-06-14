@@ -41,6 +41,6 @@ public class Employee {
 	
 	@Override
 	public String toString() {
-		return getFirstName() + " " + getLastName();
+		return getFirstName() + " " + getLastName() + " " + getPassword();
 	}
 }
