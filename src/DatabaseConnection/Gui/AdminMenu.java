@@ -20,14 +20,6 @@ public class AdminMenu extends JMenu {
             }
         });
 
-        JMenuItem editPersonMenuItem = new JMenuItem("Person bearbeiten");
-        editPersonMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                editPerson();
-            }
-        });
-
         JMenuItem removePersonMenuItem = new JMenuItem("Person entfernen");
         removePersonMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -37,18 +29,12 @@ public class AdminMenu extends JMenu {
         });
 
         add(addPersonMenuItem);
-        add(editPersonMenuItem);
         add(removePersonMenuItem);
     }
 
     private void addPerson() {
         // Implementiere die Logik zum Hinzufügen einer Person
         JOptionPane.showMessageDialog(javaGUI, "Person hinzufügen");
-    }
-
-    private void editPerson() {
-        // Implementiere die Logik zum Bearbeiten einer Person
-        JOptionPane.showMessageDialog(javaGUI, "Person bearbeiten");
     }
 
     private void removePerson() {
