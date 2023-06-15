@@ -6,8 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/sql"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Downloads/sqljdbc_12.2.0.0_deu/sqljdbc_12.2/deu/mssql-jdbc-12.2.0.jre11.jar">
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/AnwesenheitsSystem/mysql-connector-j-8.0.33.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
