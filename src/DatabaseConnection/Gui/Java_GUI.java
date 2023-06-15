@@ -139,6 +139,7 @@ public class Java_GUI extends JFrame {
                 AdminGUI adminGUI = new AdminGUI();
                 adminGUI.setVisible(true);
             } else {
+            	// Wenn kein Admin normales fenster öffnen
                 JOptionPane.showMessageDialog(Java_GUI.this, "Sie haben keine Administratorrechte!", "Fehler", JOptionPane.ERROR_MESSAGE);
             }
         } else {

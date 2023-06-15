@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PersonHinzufÃ¼gen {
+public class PersonHinzufügen {
     private JFrame frame;
     private JTextField nameField;
     private JTextField alterField;
     private JTextField ortField;
     private JComboBox<String> geschlechtComboBox;
 
-    public PersonHinzufÃ¼gen() {
+    public PersonHinzufügen() {
         frame = new JFrame("Person hinzufÃ¼gen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
@@ -81,8 +81,8 @@ public class PersonHinzufÃ¼gen {
     }
 
     public static void main(String[] args) {
-        PersonHinzufÃ¼gen personHinzufÃ¼gen = new PersonHinzufÃ¼gen();
-        personHinzufÃ¼gen.run();
+        PersonHinzufügen personHinzufügen = new PersonHinzufügen();
+        personHinzufügen.run();
     }
 }
 
