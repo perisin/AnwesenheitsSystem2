@@ -31,6 +31,9 @@ Administratoren haben die Möglichkeit, ein Konto eines Mitarbeiters zu löschen
 Login Screen:
 https://github.com/perisin/AnwesenheitsSystem2/assets/134591314/7ced3642-c22a-4541-b485-a3afa2bc2e89
 
+Mitarbeiter Screen:
+https://github.com/perisin/AnwesenheitsSystem2/assets/134591314/356dde18-137d-440e-8ff7-21532ae036ce
+
 Admin Screen:
 https://github.com/perisin/AnwesenheitsSystem2/assets/134591314/03cb9368-61d3-4317-b558-091491857b71
 
@@ -39,6 +42,8 @@ https://github.com/perisin/AnwesenheitsSystem2/assets/134591314/1fa70bee-f486-4c
 
 Mitarbeiter entfernen:
 https://github.com/perisin/AnwesenheitsSystem2/assets/134591314/b99cd246-71e1-4827-9240-200c61b2a4d3
+
+
 
 
 
