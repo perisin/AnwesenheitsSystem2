@@ -1,4 +1,4 @@
-package newGUI;
+package GUI;
 
 public interface State {
     void setPanel();

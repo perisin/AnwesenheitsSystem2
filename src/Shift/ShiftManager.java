@@ -38,11 +38,14 @@ public class ShiftManager {
 	
 	public void endShift(Employee employee) {
 		Shift shift = employeeHasActiveShift(employee);
-		System.out.println("test ");
 		if(shift != null) {
 			shift.setShiftEnd(LocalDateTime.now());
 			shiftEditor.updateEntity(shift);
-			activeShiftIDs.remove(shift.getShiftID());
+			for(int i = 0; i < activeShiftIDs.size(); i++) {
+				if(activeShiftIDs.get(i) == shift.getShiftID()) {
+					activeShiftIDs.remove(i);
+				}
+			}
 		}
 	}
 	
@@ -94,7 +97,7 @@ public class ShiftManager {
 		return null;
 	}
 	
-	public Break getShiftHasActiveBreak(Employee employee) {
+	public Break shiftHasActiveBreak(Employee employee) {
 		Shift shift = employeeHasActiveShift(employee);
 		if(shift != null) {
 			return breakManager.shiftHasActiveBreak(shift, activeBreakIDs);

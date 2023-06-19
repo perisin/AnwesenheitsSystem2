@@ -1,9 +1,10 @@
-package newGUI;
+package GUI;
 
 import javax.swing.*;
 
 import Employee.*;
 import Shift.*;
+import Break.*;
 
 import java.awt.*;
 
@@ -15,6 +16,7 @@ public class WindowStateMachine {
     private EmployeeManager employeeManager;
     private ShiftRetriever shiftRetriever;
     private ShiftManager shiftManager;
+    private BreakRetriever breakRetriever;
     
 	
     private JFrame mainFrame;
@@ -29,11 +31,7 @@ public class WindowStateMachine {
     public WindowStateMachine() {
         createFrame();
         initializeEntityClasses();
-        loginScreenState = new LoginScreenState(this);
-        adminControllerState = new AdminControllerState(this);
-        employeeAttandenceInput = new EmployeeAttandanceInput(this);
-        addEmployeeState = new AddEmployeeState(this);
-        deleteEmployeeState = new DeleteEmployeeState(this);
+        initializeStates();
         setCurrentState(loginScreenState);
     }
     private void initializeEntityClasses() {
@@ -41,6 +39,14 @@ public class WindowStateMachine {
     	employeeManager = new EmployeeManager();
     	shiftRetriever = new ShiftRetriever();
     	shiftManager = new ShiftManager();
+    	breakRetriever = new BreakRetriever();
+    }
+    private void initializeStates() {
+    	 loginScreenState = new LoginScreenState(this);
+         adminControllerState = new AdminControllerState(this);
+         employeeAttandenceInput = new EmployeeAttandanceInput(this);
+         addEmployeeState = new AddEmployeeState(this);
+         deleteEmployeeState = new DeleteEmployeeState(this);
     }
     public Employee getCurrentEmployee() {
     	return currentEmployee;
@@ -60,7 +66,9 @@ public class WindowStateMachine {
     public ShiftManager getShiftManager() {
     	return shiftManager;
     }
-    
+    public BreakRetriever getBreakRetriever() {
+    	return breakRetriever;
+    }
     public State getLoginScreenState() {
         return loginScreenState;
     }

@@ -1,4 +1,4 @@
-package newGUI;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,9 +59,8 @@ public class EmployeeAttandanceInput implements State{
 	}
 	@Override
 	public void setPanel() {
-		if(stateMachine.getShiftManager().employeeHasActiveShift(stateMachine.getCurrentEmployee()) != null) {
-			textArea.setText(textBox.setText());			
-		}
+		textArea.setText(textBox.setText());			
+		
 		if(stateMachine.getCurrentEmployee().getIs_admin()) {
 			backButtonPanel.add(backButton);
 			panel.add(backButtonPanel, BorderLayout.NORTH);			
@@ -79,7 +78,7 @@ public class EmployeeAttandanceInput implements State{
     	shiftButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			if(stateMachine.getShiftManager().employeeHasActiveShift(stateMachine.getCurrentEmployee()) == null &&
-    		    		stateMachine.getShiftManager().getShiftHasActiveBreak(stateMachine.getCurrentEmployee()) == null) {
+    		    		stateMachine.getShiftManager().shiftHasActiveBreak(stateMachine.getCurrentEmployee()) == null) {
     					
     					stateMachine.getShiftManager().startShift(stateMachine.getCurrentEmployee());
     					
@@ -88,10 +87,12 @@ public class EmployeeAttandanceInput implements State{
     		    		
     		    		breakButton.setEnabled(true);
     		    		breakButton.setText("start Break");
+    		    		
+    		    		stateMachine.setCurrentState(stateMachine.getEmployeeAttendanceInputState());
     		    		return;
     		    	}
     			if(stateMachine.getShiftManager().employeeHasActiveShift(stateMachine.getCurrentEmployee()) != null &&
-    		    		stateMachine.getShiftManager().getShiftHasActiveBreak(stateMachine.getCurrentEmployee()) == null) {
+    		    		stateMachine.getShiftManager().shiftHasActiveBreak(stateMachine.getCurrentEmployee()) == null) {
     					
     					stateMachine.getShiftManager().endShift(stateMachine.getCurrentEmployee());
     					
@@ -100,6 +101,8 @@ public class EmployeeAttandanceInput implements State{
     		    		
     		    		breakButton.setEnabled(false);
     		    		breakButton.setText("start Break");
+    		    		
+    		    		stateMachine.setCurrentState(stateMachine.getEmployeeAttendanceInputState());
     		    		return;
     		    }
     		}
@@ -108,7 +111,7 @@ public class EmployeeAttandanceInput implements State{
     	breakButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
     			if(stateMachine.getShiftManager().employeeHasActiveShift(stateMachine.getCurrentEmployee()) != null &&
-    		    		stateMachine.getShiftManager().getShiftHasActiveBreak(stateMachine.getCurrentEmployee()) == null) {
+    		    		stateMachine.getShiftManager().shiftHasActiveBreak(stateMachine.getCurrentEmployee()) == null) {
     					
     					stateMachine.getShiftManager().startBreak(stateMachine.getCurrentEmployee());
     					
@@ -117,10 +120,12 @@ public class EmployeeAttandanceInput implements State{
     		    		
     		    		breakButton.setEnabled(true);
     		    		breakButton.setText("End Break");
+    		    		
+    		    		stateMachine.setCurrentState(stateMachine.getEmployeeAttendanceInputState());
     		    		return;
     		    }
     			if(stateMachine.getShiftManager().employeeHasActiveShift(stateMachine.getCurrentEmployee()) != null &&
-    		    		stateMachine.getShiftManager().getShiftHasActiveBreak(stateMachine.getCurrentEmployee()) != null) {
+    		    		stateMachine.getShiftManager().shiftHasActiveBreak(stateMachine.getCurrentEmployee()) != null) {
     					
     					stateMachine.getShiftManager().endBreak(stateMachine.getCurrentEmployee());
     					
@@ -129,6 +134,8 @@ public class EmployeeAttandanceInput implements State{
     		    		
     		    		breakButton.setEnabled(true);
     		    		breakButton.setText("start Break");
+    		    		
+    		    		stateMachine.setCurrentState(stateMachine.getEmployeeAttendanceInputState());
     		    		return;
     		    }
     		}

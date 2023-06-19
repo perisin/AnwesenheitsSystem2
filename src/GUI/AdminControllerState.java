@@ -1,10 +1,11 @@
-package newGUI;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class AdminControllerState implements State {
+	
     private JPanel panel;
 
     private JButton addUserButton;

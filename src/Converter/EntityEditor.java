@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public abstract class EntityEditor<T> {
+	
 	private Connection connection;
 
     public EntityEditor() {
@@ -26,23 +27,21 @@ public abstract class EntityEditor<T> {
             statement.executeUpdate();
             statement.close();
         } catch (Exception e) {
-            System.out.println("Error executing insert command: " + e);
+            System.out.println("EntityEditor.insertEnttity: " + e);
         }
     }
     // looks for an object with an allready determined ID
     public void updateEntity(T entity) {
-    	String sqlCommand = getInsertCommand();
+    	String sqlCommand = getUpdateCommand();
         try {
             PreparedStatement statement = connection.prepareStatement(sqlCommand);
-            setInsertStatementValues(statement, entity);
+            setUpdateStatementValues(statement, entity);
             statement.executeUpdate();
             statement.close();
         } catch (Exception e) {
-            System.out.println("Error executing insert command: " + e);
+            System.out.println("EntityEditor.UpdateEntyty(): "+ e);
         }	
     }
-
-
     
     public void deleteEntity(T entity) {
         String sqlCommand = getDeleteCommand(entity);

@@ -1,4 +1,4 @@
-package newGUI;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -28,7 +28,7 @@ public class DeleteEmployeeState implements State {
     private JPanel backButtonPanel;
     private JButton backButton;
 
-    private JButton saveButton;
+    private JButton deleteButton;
     
     public DeleteEmployeeState(WindowStateMachine stateMachine) {
     	this.stateMachine = stateMachine;
@@ -46,7 +46,7 @@ public class DeleteEmployeeState implements State {
         backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     	backButton = createBackButton();
         buttonPanel = new JPanel();
-        saveButton = new JButton("Entferne Mitarbeiter");
+        deleteButton = new JButton("Entferne Mitarbeiter");
     }
     
     public void addComponentsToPanel() {
@@ -67,8 +67,8 @@ public class DeleteEmployeeState implements State {
         
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        addEmployee();
-        buttonPanel.add(saveButton);
+        deleteEmployee();
+        buttonPanel.add(deleteButton);
         
         backButtonPanel.add(backButton);
 		panel.add(backButtonPanel, BorderLayout.NORTH);	
@@ -77,8 +77,8 @@ public class DeleteEmployeeState implements State {
         panel.add(buttonPanel, BorderLayout.SOUTH);
     }
     
-    public void addEmployee() {
-    	saveButton.addActionListener(new ActionListener() {
+    public void deleteEmployee() {
+    	deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Employee selectedPerson = (Employee)employeeComboBox.getSelectedItem();
@@ -92,9 +92,7 @@ public class DeleteEmployeeState implements State {
     
 	@Override
 	public void setPanel() {
-		for(Component component : employeeComboBox.getComponents()) {
-			employeeComboBox.remove(component);
-		}
+		employeeComboBox.removeAllItems();
 		employeeComboBox.remove(employeeComboBox);
 		for(Employee employee : stateMachine.getEmployeeRetriever().getEntitys()) {
         	employeeComboBox.addItem(employee);

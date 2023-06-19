@@ -5,6 +5,8 @@ import Converter.TimeConverter;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
+import java.time.LocalDateTime;
 
 
 public class BreakEditor extends EntityEditor<Break> {
@@ -16,28 +18,35 @@ public class BreakEditor extends EntityEditor<Break> {
 	
 	@Override
 	public void setInsertStatementValues(PreparedStatement statement, Break _break) throws SQLException {
-		
-		
 		statement.setInt(1, _break.getBreakID());
-		statement.setTimestamp(2, TimeConverter.localtimeToTimestamp(_break.getBreakStart()));
-		statement.setTimestamp(2, TimeConverter.localtimeToTimestamp(_break.getBreakEnd()));
+		setIfNull(statement, 2, _break.getBreakStart());
+		setIfNull(statement,3,_break.getBreakEnd());
 		statement.setInt(4, _break.getShiftID());
 	}
 	@Override
 	public String getUpdateCommand() {
-		return "Update break set breakStart = ?, breakEnd = ?, shiftID = ? WHERE breakID = ?";
+		return "Update break set breakID = ?,breakStart = ?, breakEnd = ?, shiftID = ? WHERE breakID = ?";
 	}
 	
 	@Override
 	public void setUpdateStatementValues(PreparedStatement statement, Break _break) throws SQLException{
-		statement.setTimestamp(1, TimeConverter.localtimeToTimestamp(_break.getBreakStart()));
-		statement.setTimestamp(2, TimeConverter.localtimeToTimestamp(_break.getBreakEnd()));
-		statement.setInt(3, _break.getShiftID());
-		statement.setInt(4, _break.getBreakID());
+		statement.setInt(1, _break.getBreakID());
+		setIfNull(statement, 2, _break.getBreakStart());
+		setIfNull(statement,3,_break.getBreakEnd());
+		statement.setInt(4, _break.getShiftID());
+		statement.setInt(5, _break.getBreakID());
 	}
 	
 	@Override
 	public String getDeleteCommand(Break _break) {
 		return "DELETE FROM break where breakID = " + _break.getBreakID();
+	}
+	
+	private void setIfNull(PreparedStatement statement, int index, LocalDateTime breakTime) throws SQLException{
+		if(breakTime != null)
+			statement.setTimestamp(index, TimeConverter.convertToTimestamp(breakTime));
+		else
+			statement.setNull(index, Types.TIMESTAMP);
+		
 	}
 }

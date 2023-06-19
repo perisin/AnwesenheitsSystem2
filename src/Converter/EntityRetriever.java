@@ -14,7 +14,6 @@ public abstract class EntityRetriever <T>{
 			Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/anwesensheitssystem", "root", "");
             Statement statement = connection.createStatement();
-            
             String sqlStatement = getSQLCommand();
             ResultSet resultSet = statement.executeQuery(sqlStatement);
             
@@ -27,7 +26,7 @@ public abstract class EntityRetriever <T>{
             connection.close();
             }
 		catch(Exception e) {
-			System.out.println("Could not connect to the database - Error: " + e);
+			System.out.println("EntityRetriever.getEntitys(): " + e);
 		}
 		
 		return entitys;

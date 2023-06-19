@@ -1,4 +1,4 @@
-package newGUI;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,8 @@ import java.awt.event.*;
 import Employee.*;
 
 public class LoginScreenState implements State {
-    private JPanel panel;
+    
+	private JPanel panel;
 
     private JComboBox<Employee> nameComboBox;
     private JPasswordField passwordField;
@@ -42,10 +43,6 @@ public class LoginScreenState implements State {
         gbc.insets = new Insets(5, 5, 5, 5);
 
         JLabel nameLabel = new JLabel("Name:");
-
-        for (Employee employee : stateMachine.getEmployeeRetriever().getEntitys()) {
-            nameComboBox.addItem(employee);
-        }
 
         JLabel passwordLabel = new JLabel("Passwort:");
 
@@ -112,6 +109,11 @@ public class LoginScreenState implements State {
 
     @Override
     public void setPanel() {
+    	nameComboBox.removeAllItems();
+    	for (Employee employee : stateMachine.getEmployeeRetriever().getEntitys()) {
+            nameComboBox.addItem(employee);
+        }
+    	
         stateMachine.getMainFrame().add(panel);
     }
 }
