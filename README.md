@@ -44,6 +44,22 @@ Mitarbeiter entfernen:
 https://github.com/perisin/AnwesenheitsSystem2/assets/134591314/b99cd246-71e1-4827-9240-200c61b2a4d3
 
 
+## Projekt starten
+
+- Ordner "Anwesenheitssystem2" als ZIP Datei herunerladen.
+- Unzipen Sie Ordner.
+- "anwesenheitssystem" SQL Datei in XAMPP/htdocs Ordner hinzufügen.
+- Mit XAMPP, Apache und MySQL starten und auf Admin drücken.
+- Erstellen Sie eine neue Datenbank.
+- Gehen Sie auf "importieren".
+- Wählen Sie "anwesenheitssystem" SQL Datei aus.
+- Importieren Sie die Datei.
+- Starten Sie Eclipse.
+- Gehen Sie auf File/Open Projects from File System.
+- Wählen Sie "Anwesenheitssystem" Ordner aus.
+- Kompilieren Sie "savedAwesenheitsSystem" Java Project (defaultpackage)/ActivateWindowsStateMachine.
+
+
 
 
 
